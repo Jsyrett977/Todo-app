@@ -23,10 +23,21 @@ const createTask = async (task) => {
     return theTask;
 
 }
+const createUser =  async (user) => {
+    const {username, password, firstName, lastName } = user;
+    const { rows } = await client.query(`
+        INSERT INTO users(username, password, "firstName", "lastName")
+        VALUES ($1, $2, $3, $4)
+        ON CONFLICT (username) DO NOTHING
+        RETURNING *
+    `, [username, password, firstName, lastName])
+    return rows;
+}
 
 
 module.exports = {
     client,
     createTask,
-    getTasks
+    getTasks,
+    createUser
 }

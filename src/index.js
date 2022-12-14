@@ -1,9 +1,13 @@
-import React from "react";
+import { React } from "react";
 import ReactDOM from "react-dom/client";
+import { AddTask } from "./components/index";
 
 const App = () => {
     return (
-        <div>Hellooooo</div>
+        <div>
+            
+        <AddTask />
+        </div>
     )
 }
 
