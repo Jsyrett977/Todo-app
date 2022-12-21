@@ -1,12 +1,13 @@
 require('dotenv').config()
 const express = require('express');
+const cors = require("cors")
 const app = express()
 const morgan = require('morgan')
 const apiRouter = require('./api/index.js')
 const {client} = require('./db/index')
 client.connect();
 
-
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json())
 app.get('/api', (req, res, next) => {
@@ -17,8 +18,9 @@ app.get('/api', (req, res, next) => {
 app.use('/api', apiRouter)
 
 app.use((error, req, res, next) => {
-    res.send(
-        error
+    console.error(error.stack)
+    res.status(500).send(
+        "Something Broke"
     )
 })
 
