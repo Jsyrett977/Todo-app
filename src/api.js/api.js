@@ -9,7 +9,6 @@ export async function fetchTasks() {
             }
         })
         const data = await response.json();
-        console.log(data)
         return data
     } catch(error){
         throw(error)

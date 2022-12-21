@@ -1,4 +1,5 @@
 const {Client} = require('pg');
+const bcrypt = require('bcrypt')
 const { DATABASE_URL = 'postgres://localhost:5432/todo-dev' } = process.env;
 const client = new Client({
     connectionString: DATABASE_URL,
@@ -13,31 +14,49 @@ const getTasks = async () => {
     return rows;
 }
 
-const createTask = async (task) => {
+const createTask = async (task, due) => {
     const {rows: [theTask]} = await client.query(`
-    INSERT INTO tasks(task)
-    VALUES ($1)
+    INSERT INTO tasks(task, due_date)
+    VALUES ($1, $2)
     RETURNING *
     ;
-`, [task])
+`, [task, due])
     return theTask;
 
 }
 const createUser =  async (user) => {
     const {username, password, firstName, lastName } = user;
-    const { rows } = await client.query(`
+    const cryptedPassword = await bcrypt.hash(password, 10)
+    try{
+    const { rows: [user] } = await client.query(`
         INSERT INTO users(username, password, "firstName", "lastName")
         VALUES ($1, $2, $3, $4)
         ON CONFLICT (username) DO NOTHING
         RETURNING *
-    `, [username, password, firstName, lastName])
-    return rows;
+    `, [username, cryptedPassword, firstName, lastName])
+    return user;
+    }catch(error){
+        throw error;
+    }
 }
-
+const getUserByUsername = async (username) => {
+    try{
+        const { rows: [user] } = await client.query(`
+        SELECT *
+        FROM users
+        WHERE username = $1
+        ;
+        `, [username]);
+        return user
+    } catch(error){
+        console.error("getuser", error)
+    }
+}
 
 module.exports = {
     client,
     createTask,
     getTasks,
-    createUser
+    createUser,
+    getUserByUsername
 }

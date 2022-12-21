@@ -9,14 +9,14 @@ const App = () => {
     useEffect(() => {
         fetchTasks().then((result) => {
             setTasks(result.tasks)
+            console.log(result.tasks[0].due_date)
         })
     }, []);
 
     return (
         <div>
-            
-        <AddTask tasks={tasks} setTasks={setTasks} />
         <TasksList tasks={tasks} setTasks={setTasks}/>
+        <AddTask tasks={tasks} setTasks={setTasks} />
         </div>
     )
 }

@@ -10,7 +10,7 @@ client.connect();
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json())
-app.get('/api', (req, res, next) => {
+app.get('/', (req, res, next) => {
     res.send({
         message: 'Hello World'
     })

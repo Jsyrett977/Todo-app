@@ -5,7 +5,7 @@ const TaskList = ({tasks, setTasks}) => {
     return (
         <>
         <h2>Tasks</h2>
-        <div id="tasksPage">
+        <div id="tasks_page">
             <div id='all_tasks'>
                 {tasks.map((task, index) => {
                     return (

@@ -3,6 +3,7 @@ const { client } = require('./index.js')
 const rebuildDB = async () => {
     await client.query(`
         DROP TABLE IF EXISTS tasks;
+        DROP TABLE If EXISTS users
     `)
 
     console.log('Creating Tables');
@@ -11,7 +12,8 @@ const rebuildDB = async () => {
     CREATE TABLE tasks(
         id SERIAL PRIMARY KEY,
         task text NOT NULL,
-        complete boolean NOT NULL DEFAULT false
+        complete boolean NOT NULL DEFAULT false,
+        due_date DATE NOT NULL
     );
     CREATE TABLE users(
         id SERIAL PRIMARY KEY,

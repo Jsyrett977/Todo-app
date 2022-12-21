@@ -1,5 +1,19 @@
-#taskForm {
+#task_form {
     border: 2px solid black;
     width: 15vw;
     padding: 2px;
+    margin-top: 3px;
+}
+#all_tasks{
+    width: fit-content;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+#single_task{
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    width: fit-content;
+    padding: 2px 5px;
 }

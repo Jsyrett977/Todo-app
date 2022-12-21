@@ -1,8 +1,8 @@
 const express = require('express')
-const router = express.Router()
+const tasksRouter = express.Router()
 const { createTask, getTasks, client } = require('../db/index.js')
 
-router.get('/', async (req,res, next) => {
+tasksRouter.get('/', async (req,res, next) => {
     try{
     const tasks = await getTasks();
     res.send({
@@ -12,10 +12,10 @@ router.get('/', async (req,res, next) => {
     throw error
 }
 })
-router.post('/', async (req, res, next) => {
-    const { task } = req.body;
+tasksRouter.post('/', async (req, res, next) => {
+    const { task, due_date } = req.body;
     try{
-        await createTask(task);
+        await createTask(task, due_date);
         res.send({
             message: 'Task Added'
         })
@@ -24,4 +24,4 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-module.exports = router;
+module.exports = tasksRouter;
