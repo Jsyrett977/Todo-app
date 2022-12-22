@@ -52,11 +52,24 @@ const getUserByUsername = async (username) => {
         console.error("getuser", error)
     }
 }
-
+const getUserById = async (id) => {
+    try{
+        const { rows: [user] } = await client.query(`
+        SELECT *
+        FROM users
+        WHERE id = $1
+        ;
+        `, [id])
+        return user;
+    }catch(error){
+        throw error
+    }
+}
 module.exports = {
     client,
     createTask,
     getTasks,
     createUser,
-    getUserByUsername
+    getUserByUsername,
+    getUserById
 }

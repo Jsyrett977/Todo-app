@@ -1,7 +1,9 @@
 import { React, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
-import { AddTask, TasksList } from "./components/index";
+import { AddTask, TasksList, Register } from "./components/index";
 import { fetchTasks } from "./api.js/api";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import NavBar from "./components/NavBar";
 const App = () => {
 
     const [ tasks, setTasks ] = useState([])
@@ -15,8 +17,15 @@ const App = () => {
 
     return (
         <div>
-        <TasksList tasks={tasks} setTasks={setTasks}/>
-        <AddTask tasks={tasks} setTasks={setTasks} />
+            <BrowserRouter>
+            <NavBar />
+            <Routes>
+            <Route path="/register" element={<Register />}/>
+            </Routes>
+            <TasksList tasks={tasks} setTasks={setTasks}/>
+            <AddTask tasks={tasks} setTasks={setTasks}/>
+            
+            </BrowserRouter>
         </div>
     )
 }

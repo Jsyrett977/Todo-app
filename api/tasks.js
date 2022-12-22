@@ -1,6 +1,7 @@
 const express = require('express')
 const tasksRouter = express.Router()
 const { createTask, getTasks, client } = require('../db/index.js')
+const { requireUser } = require('./utils')
 
 tasksRouter.get('/', async (req,res, next) => {
     try{
