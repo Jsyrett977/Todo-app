@@ -14,13 +14,13 @@ const getTasks = async () => {
     return rows;
 }
 
-const createTask = async (task, due) => {
+const createTask = async (task, due, creatorId) => {
     const {rows: [theTask]} = await client.query(`
-    INSERT INTO tasks(task, due_date)
-    VALUES ($1, $2)
+    INSERT INTO tasks(task, due_date, "creatorId")
+    VALUES ($1, $2, $3)
     RETURNING *
     ;
-`, [task, due])
+`, [task, due, creatorId])
     return theTask;
 
 }

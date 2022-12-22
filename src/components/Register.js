@@ -1,14 +1,19 @@
 import { useState } from 'react';
 import { registerUser } from '../api.js/api';
-const Register = () => {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+import { useNavigate } from 'react-router-dom';
+const Register = ({username, setUsername, password, setPassword}) => {
+    let navigate = useNavigate()
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     return (
         <form id="register_form" className="forms" onSubmit={(event) => {
             event.preventDefault();
             registerUser(username, password, firstName, lastName)
+            navigate('/login')
+            setUsername('');
+            setPassword('');
+            setFirstName('');
+            setLastName('');
         }}>
             <input className="text_input" type="text" placeholder='Username' value={username} 
             onChange={(event)=>setUsername(event.target.value)}/>

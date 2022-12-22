@@ -3,6 +3,13 @@
     justify-content: space-between;
     align-items: center;
     margin: 10px 20px 10px 20px;
+    width: 50vw;
+}
+#nav_bar{
+    display: flex;
+    justify-content: space-between;
+    width: 20vw;
+    margin-right: 10vw;
 }
 #task_form {
     border: 2px solid black;

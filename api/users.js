@@ -52,7 +52,6 @@ usersRouter.post('/login', async (req, res, next) => {
                 })
                 delete user.password;
                 user.token = token;
-                console.log(token);
                 res.send({
                     user,
                     message: "Logged In!"

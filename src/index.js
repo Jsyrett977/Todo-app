@@ -1,12 +1,12 @@
 import { React, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
-import { AddTask, TasksList, Register } from "./components/index";
+import { AddTask, TasksList, Register, NavBar, Login } from "./components/index";
 import { fetchTasks } from "./api.js/api";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import NavBar from "./components/NavBar";
 const App = () => {
-
     const [ tasks, setTasks ] = useState([])
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
 
     useEffect(() => {
         fetchTasks().then((result) => {
@@ -20,9 +20,10 @@ const App = () => {
             <BrowserRouter>
             <NavBar />
             <Routes>
-            <Route path="/register" element={<Register />}/>
+            <Route path="/register" element={<Register username={username} setUsername={setUsername} password={password} setPassword={setPassword}/>}/>
+            <Route path="/login" element={<Login username={username} setUsername={setUsername} password={password} setPassword={setPassword}/>}/>
+            <Route path="/" element={<TasksList tasks={tasks} setTasks={setTasks}/>}/>
             </Routes>
-            <TasksList tasks={tasks} setTasks={setTasks}/>
             <AddTask tasks={tasks} setTasks={setTasks}/>
             
             </BrowserRouter>
