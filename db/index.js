@@ -99,6 +99,20 @@ const getUserWithTasksById = async (id) => {
         throw error
     }
 }
+const completeTask = async (taskId, complete) => {
+    try{
+        const {rows: [completedTask]} = await client.query(`
+            UPDATE tasks
+            SET complete = $1
+            WHERE id = $2
+            RETURNING *
+            ;
+        `, [complete, taskId])
+        return completedTask
+    }catch(error){
+        throw error
+    }
+}
 module.exports = {
     client,
     createTask,
@@ -107,5 +121,6 @@ module.exports = {
     getUserByUsername,
     getUserById,
     getTasksByUserId,
-    getUserWithTasksById
+    getUserWithTasksById,
+    completeTask
 }

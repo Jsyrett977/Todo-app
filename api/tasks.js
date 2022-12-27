@@ -1,6 +1,6 @@
 const express = require('express')
 const tasksRouter = express.Router()
-const { createTask, getTasks, client } = require('../db/index.js')
+const { createTask, getTasks, completeTask, getTasksByUserId } = require('../db/index.js')
 const { requireUser } = require('./utils')
 
 tasksRouter.get('/', async (req,res, next) => {
@@ -13,7 +13,16 @@ tasksRouter.get('/', async (req,res, next) => {
     throw error
 }
 })
-tasksRouter.post('/', async (req, res, next) => {
+tasksRouter.get('/:creatorId', requireUser, async (req, res, next) => {
+    const creatorId = req.params.creatorId
+    try{
+        const userTasks = await getTasksByUserId(creatorId);
+        res.send(userTasks);
+    }catch(error){
+        throw error;
+    }
+})
+tasksRouter.post('/', requireUser, async (req, res, next) => {
     const { task, due_date, creatorId } = req.body;
     try{
         await createTask(task, due_date, creatorId);
@@ -21,6 +30,17 @@ tasksRouter.post('/', async (req, res, next) => {
             message: 'Task Added'
         })
     } catch(error){
+        throw error
+    }
+})
+tasksRouter.patch('/:taskId', requireUser, async (req, res, next) => {
+    const taskId = req.params.taskId
+    const {complete} = req.body;
+
+    try{
+        const taskCompleted = await completeTask(taskId, complete)
+        res.send(taskCompleted)
+    }catch(error){
         throw error
     }
 })

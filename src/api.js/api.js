@@ -16,6 +16,20 @@ export async function fetchTasks() {
         throw(error)
     }
 }
+export async function fetchUserTasks(id, token){
+    try{
+        const response = await fetch(`${BASE_URL}/tasks/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        const result = await response.json();
+        return result
+    }catch(error){
+        throw error;
+    }
+}
 export async function registerUser(username, password, firstName, lastName) {
     try{
         const response = await fetch(`${BASE_URL}/users/register`, {
@@ -51,9 +65,56 @@ export async function loginUser(username, password) {
             }) 
         })
         const result = await response.json();
-        console.log(result)
         return result;
     }catch(error){
         throw error;
+    }
+}
+export async function fetchMe(token){
+    try{
+        const response = await fetch(`${BASE_URL}/users/me`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        const result = await response.json();
+        return result;
+    }catch(error){
+        throw error
+    }
+}
+export async function createNewTask(task, due_date, creatorId, token){
+    const response = await fetch(`${BASE_URL}/tasks`,{
+        method: "POST",
+        headers: {
+            'Content-Type': "application/json",
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            task,
+            due_date,
+            creatorId
+        })
+    })
+    const result = await response.json()
+    return result;
+}
+export async function updateTask(taskId, complete, token){
+    try{
+        const response = await fetch(`${BASE_URL}/tasks/${taskId}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                complete,
+            })
+        })
+        const result = await response.json();
+        return result;
+    }catch(error){
+        throw error
     }
 }
