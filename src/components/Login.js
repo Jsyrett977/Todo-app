@@ -1,6 +1,6 @@
 import { loginUser } from "../api.js/api";
 import { useNavigate } from "react-router-dom";
-const Login = ({username, setUsername, password, setPassword}) => {
+const Login = ({username, setUsername, password, setPassword, setToken}) => {
     let navigate = useNavigate();
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -8,6 +8,7 @@ const Login = ({username, setUsername, password, setPassword}) => {
             const data = await loginUser(username, password);
             const token = data.user.token
             localStorage.setItem("token", token)
+            setToken(token)
             navigate('/')
             setUsername('');
             setPassword('');

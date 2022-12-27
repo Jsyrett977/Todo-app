@@ -1,8 +1,9 @@
 const express = require('express')
 const usersRouter = express.Router()
-const { createUser, getUserByUsername } = require('../db/index')
+const { createUser, getUserByUsername, getUserWithTasksById} = require('../db/index')
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const { requireUser } = require('./utils');
 
 usersRouter.post('/register', async (req, res, next) => {
     const {username, password, firstName, lastName} = req.body;
@@ -64,6 +65,18 @@ usersRouter.post('/login', async (req, res, next) => {
         }
     }catch(error){
         throw error
+    }
+})
+
+usersRouter.get('/me', requireUser, async (req, res, next) => {
+    if(req.user){
+        const user = await getUserWithTasksById(req.user.id)
+        res.send(user)
+    } else{
+        res.status(401).send({
+            name: "UnauthorizedError",
+            message: "Must be logged in"
+        })
     }
 })
 module.exports = usersRouter;

@@ -14,9 +14,9 @@ tasksRouter.get('/', async (req,res, next) => {
 }
 })
 tasksRouter.post('/', async (req, res, next) => {
-    const { task, due_date } = req.body;
+    const { task, due_date, creatorId } = req.body;
     try{
-        await createTask(task, due_date);
+        await createTask(task, due_date, creatorId);
         res.send({
             message: 'Task Added'
         })

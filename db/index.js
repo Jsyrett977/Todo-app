@@ -65,11 +65,47 @@ const getUserById = async (id) => {
         throw error
     }
 }
+const getTasksByUserId = async (id) => {
+    try{
+        const {rows: tasks} = await client.query(`
+            SELECT task, complete, due_date
+            FROM tasks
+            WHERE "creatorId" = $1
+            ;
+        `, [id])
+        return tasks;
+    }catch(error){
+        throw error;
+    }
+}
+const getUserWithTasksById = async (id) => {
+    try{
+        const {rows: [user]} = await client.query(`
+        SELECT *
+        FROM users
+        WHERE users.id = $1
+        ;
+        `, [id])
+        const {rows: tasks} = await client.query(`
+            SELECT *
+            FROM tasks
+            WHERE "creatorId" = $1
+            ;
+        `,[id])
+        user.tasks = tasks;
+        delete user.password
+        return user;
+    }catch(error){
+        throw error
+    }
+}
 module.exports = {
     client,
     createTask,
     getTasks,
     createUser,
     getUserByUsername,
-    getUserById
+    getUserById,
+    getTasksByUserId,
+    getUserWithTasksById
 }
