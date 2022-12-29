@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import {Logout} from "./index"
 const NavBar = ({token, setToken}) => {
     return (
         <header id="header">

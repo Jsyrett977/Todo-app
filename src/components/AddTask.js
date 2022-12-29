@@ -1,8 +1,10 @@
 import { React, useState } from "react";
 import { createNewTask } from "../api.js/api";
 const AddTask = ({me, token}) => {
+
     const [task, setTask] = useState("")
     const [dueDate, setDueDate] = useState("")
+    
     const handleSubmit = async (event) => {
         event.preventDefault();
         await createNewTask(task, dueDate, me.id, token)

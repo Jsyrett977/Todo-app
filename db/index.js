@@ -113,6 +113,17 @@ const completeTask = async (taskId, complete) => {
         throw error
     }
 }
+const deleteTask = async (taskId) => {
+    try{
+        const {rows: [deletedPost]} = await client.query(`
+            DELETE FROM tasks
+            WHERE id = $1
+            ;
+        `, [taskId])
+    }catch(error){
+        throw error;
+    }
+}
 module.exports = {
     client,
     createTask,
@@ -122,5 +133,6 @@ module.exports = {
     getUserById,
     getTasksByUserId,
     getUserWithTasksById,
-    completeTask
+    completeTask,
+    deleteTask
 }

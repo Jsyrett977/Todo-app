@@ -1,6 +1,6 @@
 const express = require('express')
 const tasksRouter = express.Router()
-const { createTask, getTasks, completeTask, getTasksByUserId } = require('../db/index.js')
+const { createTask, getTasks, completeTask, getTasksByUserId, deleteTask } = require('../db/index.js')
 const { requireUser } = require('./utils')
 
 tasksRouter.get('/', async (req,res, next) => {
@@ -44,5 +44,16 @@ tasksRouter.patch('/:taskId', requireUser, async (req, res, next) => {
         throw error
     }
 })
-
+tasksRouter.delete('/:taskId', requireUser, async (req, res, next) => {
+    const taskId = req.params.taskId;
+    try{
+        const deletedTask =  await deleteTask(taskId);
+        res.send({
+            message: 'Task Deleted',
+            deletedTask,
+        })
+    } catch(error){
+        throw error;
+    }
+})
 module.exports = tasksRouter;

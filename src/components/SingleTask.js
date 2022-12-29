@@ -1,11 +1,12 @@
-import { updateTask } from "../api.js/api";
-import { useState } from "react";
+import { updateTask, deleteTask } from "../api.js/api";
 const SingleTask = ({task, token}) => {
     const dateString = new Date(task.due_date).toLocaleDateString(
         'en-US',{weekday: "long", month: "long", day: "numeric"})
-        const [complete, setComplete] = useState(false)
         const handleComplete = () => {
             updateTask(task.id, task.complete, token)
+        }
+        const handleDelete = () => {
+            deleteTask(task.id, token)
         }
     return (
         <div id='single_task'>
@@ -15,7 +16,7 @@ const SingleTask = ({task, token}) => {
                 <button className="complete_button" onClick={handleComplete}>Not Complete</button>
                 : 
                 <button className="complete_button" onClick={handleComplete}>Complete</button>}
-            <button id="delete_button">Delete</button>
+            <button id="delete_button" onClick={handleDelete}>Delete</button>
         </div>
     )
 }

@@ -122,3 +122,18 @@ export async function updateTask(taskId, complete, token){
         throw error
     }
 }
+export async function deleteTask(taskId, token){
+    try{
+        const response = await fetch(`${BASE_URL}/tasks/${taskId}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` 
+            }
+        })
+        const result = await response.json();
+        return result;
+    } catch(error){
+        throw error;
+    }
+}
