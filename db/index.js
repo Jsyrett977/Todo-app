@@ -68,7 +68,7 @@ const getUserById = async (id) => {
 const getTasksByUserId = async (id) => {
     try{
         const {rows: tasks} = await client.query(`
-            SELECT task, complete, due_date
+            SELECT id, task, complete, due_date
             FROM tasks
             WHERE "creatorId" = $1
             ;

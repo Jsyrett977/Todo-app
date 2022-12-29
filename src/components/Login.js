@@ -9,7 +9,7 @@ const Login = ({username, setUsername, password, setPassword, setToken}) => {
             const token = data.user.token
             localStorage.setItem("token", token)
             setToken(token)
-            navigate('/')
+            navigate('/tasks')
             setUsername('');
             setPassword('');
         }catch(error){

@@ -1,4 +1,3 @@
-import { RowDescriptionMessage } from "pg-protocol/dist/messages";
 
 const BASE_URL = "http://localhost:3001/api";
 
@@ -101,6 +100,11 @@ export async function createNewTask(task, due_date, creatorId, token){
     return result;
 }
 export async function updateTask(taskId, complete, token){
+    if(complete){
+        complete = false
+    }else {
+        complete = true
+    }
     try{
         const response = await fetch(`${BASE_URL}/tasks/${taskId}`, {
             method: 'PATCH',

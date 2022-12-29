@@ -5,14 +5,16 @@ const SingleTask = ({task, token}) => {
         'en-US',{weekday: "long", month: "long", day: "numeric"})
         const [complete, setComplete] = useState(false)
         const handleComplete = () => {
-            updateTask(task.id, complete, token)
-            setComplete(!complete)
+            updateTask(task.id, task.complete, token)
         }
     return (
         <div id='single_task'>
             <p>Task: {task.task}</p>
             <p>Due: {dateString}</p>
-            <button id="complete_button" onClick={handleComplete}>Complete</button>
+            {task.complete ?
+                <button className="complete_button" onClick={handleComplete}>Not Complete</button>
+                : 
+                <button className="complete_button" onClick={handleComplete}>Complete</button>}
             <button id="delete_button">Delete</button>
         </div>
     )

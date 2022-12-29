@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
-import { AddTask, TasksList, Register, NavBar, Login } from "./components/index";
+import { AddTask, TasksList, Register, NavBar, Login, CompletedTasks, Welcome } from "./components/index";
 import { fetchMe, fetchUserTasks } from "./api.js/api";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 const App = () => {
@@ -33,11 +33,13 @@ const App = () => {
             <BrowserRouter>
             <NavBar token={token} setToken={setToken}/>
             <Routes>
+            <Route path="/" element={<Welcome />}/>
             <Route path="/register" element={<Register username={username} setUsername={setUsername} password={password} setPassword={setPassword}/>}/>
             <Route path="/login" element={<Login username={username} setUsername={setUsername} password={password} setPassword={setPassword} setToken={setToken}/>}/>
-            <Route path="/" element={<TasksList tasks={tasks} setTasks={setTasks} token={token} me={me}/>}/>
+            <Route path="/tasks" element={<TasksList tasks={tasks} setTasks={setTasks} token={token} me={me}/>}/>
+            <Route path="/Completed" element={<CompletedTasks tasks={tasks} setTasks={setTasks} token={token} me={me}/>}/>
             </Routes>
-            <AddTask tasks={tasks} setTasks={setTasks} me={me} token={token}/>
+            {token ? <AddTask tasks={tasks} setTasks={setTasks} me={me} token={token}/> : null}
             
             </BrowserRouter>
         </div>

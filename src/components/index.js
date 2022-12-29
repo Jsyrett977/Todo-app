@@ -1,5 +1,7 @@
+export {default as Welcome} from './Welcome'
 export {default as AddTask} from './AddTask'
 export {default as TasksList} from './TasksList'
+export {default as CompletedTasks} from './CompletedTasks'
 export {default as SingleTask} from './SingleTask'
 export {default as Register} from './Register'
 export {default as NavBar} from './NavBar'

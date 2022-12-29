@@ -6,9 +6,10 @@ const NavBar = ({token, setToken}) => {
         <header id="header">
             <h1>Task Tracker</h1>
             <nav id="nav_bar">
-                <NavLink className='nav_link' to="/">Home</NavLink>
-                {token ? null : <NavLink className='nav_link' to="/register">Register</NavLink>}
-                {token ? <Logout setToken={setToken}/> : <NavLink className='nav_link' to="/login">Login</NavLink>}
+                {token ? <NavLink className='nav_link' to="/tasks">Tasks</NavLink> : null}
+                {token ? <NavLink className='nav_link' to="/completed">Completed</NavLink> : null}
+                {/* {token ? null : <NavLink className='nav_link' to="/register">Register</NavLink>}
+                {token ? <Logout setToken={setToken}/> : <NavLink className='nav_link' to="/login">Login</NavLink>} */}
             </nav>
         </header>
     )

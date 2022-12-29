@@ -1,4 +1,3 @@
-import {useState} from "react";
 import SingleTask from './SingleTask'
 
 const TaskList = ({tasks, setTasks, token, me}) => {
@@ -8,7 +7,9 @@ const TaskList = ({tasks, setTasks, token, me}) => {
         <div id="tasks_page">
             <div id='all_tasks'>
                 {tasks.map((task, index) => {
-                    return (
+                    if(task.complete){
+                        return
+                    }return (
                         <SingleTask key={index} task={task} setTasks={setTasks} token={token}/>
                     )
                 })}
