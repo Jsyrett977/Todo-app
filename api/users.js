@@ -19,7 +19,7 @@ usersRouter.post('/register', async (req, res, next) => {
         if(_user){
             res.status(401).send({
                 name: "UsernameTaken",
-                message: "Please choose another username"
+                message: "Username is taken, please choose another username"
             })
             return;
         }else{
@@ -47,22 +47,30 @@ usersRouter.post('/login', async (req, res, next) => {
     }
     try{
         const user = await getUserByUsername(username);
-        if(await bcrypt.compare(password, user.password)){
-            const token = jwt.sign(user, process.env.JWT_SECRET, {
-                    expiresIn: "1w"
-                })
-                delete user.password;
-                user.token = token;
+        if(user){
+            if(await bcrypt.compare(password, user.password)){
+                const token = jwt.sign(user, process.env.JWT_SECRET, {
+                        expiresIn: "1w"
+                    })
+                    delete user.password;
+                    user.token = token;
+                    res.send({
+                        user,
+                        message: "Logged In!"
+                    })
+            }else{
                 res.send({
-                    user,
-                    message: "Logged In!"
+                    name: "IncorrectUsernameorPassword",
+                    message: "Username or Password is incorrect"
                 })
+            }
         }else{
             res.send({
                 name: "IncorrectUsernameorPassword",
                 message: "Username or Password is incorrect"
             })
         }
+
     }catch(error){
         throw error
     }

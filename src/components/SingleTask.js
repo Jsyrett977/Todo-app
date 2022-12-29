@@ -10,10 +10,7 @@ const SingleTask = ({tasks, setTasks, task, token}) => {
         }
         const handleDelete = async () => {
             const deletedTask = await deleteTask(task.id, token)
-            console.log(tasks)
-            console.log(deletedTask)
             const newTasks = tasks.filter(task => task.id !== deletedTask.id)
-            console.log(newTasks)
             setTasks(newTasks)
         }
     return (

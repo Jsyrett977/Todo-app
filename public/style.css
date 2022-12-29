@@ -5,7 +5,7 @@ html {
     height: 100%;
 }
 body {
-    background: linear-gradient(to bottom, #333333, #808080);
+    background: linear-gradient(to bottom, #333333, #7a6262);
     height: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -35,6 +35,9 @@ a {
 }
 a:hover {
     color: #aaa;
+}
+.yellow {
+    color: yellow;
 }
 #header {
     display: flex;
@@ -87,8 +90,9 @@ label {
     max-width: 400px;
     padding: 5px;
     margin: 5px;
+    border-radius: 4px;
     margin-bottom: 10px;
-    color: white
+    color: white;
 }
 input{
     margin: 2px;

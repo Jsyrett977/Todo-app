@@ -12,7 +12,7 @@ app.use(morgan('dev'));
 app.use(express.json())
 app.get('/', (req, res, next) => {
     res.send({
-        message: 'Hello World'
+        message: 'Welcome'
     })
 })
 app.use('/api', apiRouter)

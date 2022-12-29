@@ -44,7 +44,6 @@ const App = () => {
             <Route path="/Completed" element={<CompletedTasks tasks={tasks} setTasks={setTasks} token={token} me={me}/>}/>
             </Routes>
             {token ? <AddTask tasks={tasks} setTasks={setTasks} me={me} token={token}/> : null}
-            
             </BrowserRouter>
         </div>
     )

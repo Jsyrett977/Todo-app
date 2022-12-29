@@ -71,6 +71,7 @@ const getTasksByUserId = async (id) => {
             SELECT id, task, complete, due_date
             FROM tasks
             WHERE "creatorId" = $1
+            ORDER BY due_date ASC
             ;
         `, [id])
         return tasks;
