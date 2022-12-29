@@ -10,9 +10,11 @@ const Welcome = () => {
     return (
         <div id="welcome">
         <h3>Welcome to Task Tracker!</h3>
-        <p>Please either login or register to continue</p>
-        <button onClick={navigateToLogin}>Login</button>
-        <button onClick={navigateToRegister}>Register</button>
+        <p>Please login or register to continue</p>
+        <div id="button_container">
+        <button id='nav_login' onClick={navigateToLogin}>Login</button>
+        <button id='nav_register' onClick={navigateToRegister}>Register</button>
+        </div>
         </div>
     )
 }

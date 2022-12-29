@@ -16,9 +16,12 @@ const AddTask = ({tasks, setTasks, me, token}) => {
     return (
         <div>
             <form id="task_form" onSubmit={handleSubmit}>
-            <input type="text" value={task} required placeholder="New Task" onChange={(event) => setTask(event.target.value)}></input>
-            <label>Due Date<input type="date" value={dueDate} required onChange={(event) => setDueDate(event.target.value)}></input></label>
-            <button type="submit">Add Task</button>
+                <h3>Create a new Task</h3>
+            <input className='text_input' type="text" value={task} required placeholder="New Task" onChange={(event) => setTask(event.target.value)}></input>
+            <div>
+            <label>Due By<input id='date' type="date" value={dueDate} required onChange={(event) => setDueDate(event.target.value)}></input></label>
+            <button id="add_button" type="submit">Add Task</button>
+            </div>
             </form>
             </div>
     )

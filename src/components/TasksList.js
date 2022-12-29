@@ -9,8 +9,8 @@ const TaskList = ({tasks, setTasks, token, me}) => {
     return (
         <>
         <h2>{me.firstName}'s Tasks</h2>
-        <div id="tasks_page">
-            <div id='all_tasks'>
+        <div className="tasks_page">
+            <div className='all_tasks'>
                 {activeTasks.map((task, index) => {
                     return (
                     <SingleTask key={index} tasks={tasks} setTasks={setTasks} task={task} token={token}/>

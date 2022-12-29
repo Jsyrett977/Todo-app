@@ -35,7 +35,7 @@ const App = () => {
     return (
         <div id="app">
             <BrowserRouter>
-            <NavBar token={token} setToken={setToken}/>
+            <NavBar token={token} setToken={setToken} setMe={setMe}/>
             <Routes>
             <Route path="/" element={<Welcome />}/>
             <Route path="/register" element={<Register username={username} setUsername={setUsername} password={password} setPassword={setPassword}/>}/>

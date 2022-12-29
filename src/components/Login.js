@@ -17,16 +17,16 @@ const Login = ({username, setUsername, password, setPassword, setToken}) => {
         }
     }
     return (
-        <div id="form_container">
-            <h3>Please Enter your Username and Password</h3>
-            <form className="forms" onSubmit={handleLogin}>
+        <form className="form_container" onSubmit={handleLogin}>
+            <h3>Please enter your username and password or <a href="/register">register </a> an account</h3>
+            
                 <input className="text_input" type="text" placeholder='Username' value={username} 
                     onChange={(event)=>setUsername(event.target.value)}/>
                 <input className="text_input" type="password" minLength='8' placeholder='Password' value={password}
                     onChange={(event)=>setPassword(event.target.value)}/>
-                    <button type="submit">Login</button>
+                    <button className="submit_button" type="submit">Login</button>
             </form>
-        </div>
+        
     )
 }
 export default Login;

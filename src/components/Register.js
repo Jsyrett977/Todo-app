@@ -6,7 +6,7 @@ const Register = ({username, setUsername, password, setPassword}) => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     return (
-        <form id="register_form" className="forms" onSubmit={(event) => {
+        <form className="form_container" onSubmit={(event) => {
             event.preventDefault();
             registerUser(username, password, firstName, lastName)
             navigate('/login')
@@ -15,6 +15,7 @@ const Register = ({username, setUsername, password, setPassword}) => {
             setFirstName('');
             setLastName('');
         }}>
+            <h3>Please register for an account or <a href="/login">login </a>if you have an account</h3>
             <input className="text_input" type="text" placeholder='Username' value={username} 
             onChange={(event)=>setUsername(event.target.value)}/>
             <input className="text_input" type="password" minLength='8' placeholder='Password' value={password}
@@ -23,7 +24,7 @@ const Register = ({username, setUsername, password, setPassword}) => {
             onChange={(event)=>setFirstName(event.target.value)}/>
             <input className="text_input" type="text" placeholder='Last Name' value={lastName}
             onChange={(event)=>setLastName(event.target.value)}/>
-            <button type='submit'>Register</button>
+            <button className="submit_button" type='submit'>Register</button>
         </form>
     )
 }
