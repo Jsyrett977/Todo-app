@@ -9,7 +9,7 @@ const Welcome = () => {
     }
     return (
         <div id="welcome">
-        <h3>Welcome to Task Traker!</h3>
+        <h3>Welcome to Task Tracker!</h3>
         <p>Please either login or register to continue</p>
         <button onClick={navigateToLogin}>Login</button>
         <button onClick={navigateToRegister}>Register</button>

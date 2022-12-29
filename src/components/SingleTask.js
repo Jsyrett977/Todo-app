@@ -17,14 +17,14 @@ const SingleTask = ({tasks, setTasks, task, token}) => {
             setTasks(newTasks)
         }
     return (
-        <div id='single_task'>
+        <div className='single_task'>
             <p>Task: {task.task}</p>
             <p>Due: {dateString}</p>
             {task.complete ?
                 <button className="complete_button" onClick={handleComplete}>Not Complete</button>
                 : 
                 <button className="complete_button" onClick={handleComplete}>Complete</button>}
-            <button id="delete_button" onClick={handleDelete}>Delete</button>
+            <div className="delete_container"><button id="delete_button" onClick={handleDelete}><i className="fas fa-trash"></i></button></div>
         </div>
     )
 }

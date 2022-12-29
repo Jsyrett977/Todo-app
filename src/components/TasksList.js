@@ -5,7 +5,6 @@ const TaskList = ({tasks, setTasks, token, me}) => {
     useEffect(() => {
         const activeTasksArray = tasks.filter(task => !task.complete)
         setActiveTasks(activeTasksArray)
-        console.log('hi')
     }, [tasks])
     return (
         <>
@@ -14,7 +13,7 @@ const TaskList = ({tasks, setTasks, token, me}) => {
             <div id='all_tasks'>
                 {activeTasks.map((task, index) => {
                     return (
-                    <SingleTask key={index} tasks={tasks} setTasks={setTasks} task={task} setTasks={setTasks} token={token}/>
+                    <SingleTask key={index} tasks={tasks} setTasks={setTasks} task={task} token={token}/>
                     )
                 })}
             </div>

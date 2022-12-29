@@ -33,7 +33,7 @@ const App = () => {
     }, [me]);
 
     return (
-        <div>
+        <div id="app">
             <BrowserRouter>
             <NavBar token={token} setToken={setToken}/>
             <Routes>
