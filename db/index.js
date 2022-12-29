@@ -115,11 +115,13 @@ const completeTask = async (taskId, complete) => {
 }
 const deleteTask = async (taskId) => {
     try{
-        const {rows: [deletedPost]} = await client.query(`
+        const {rows: [deletedTask]} = await client.query(`
             DELETE FROM tasks
             WHERE id = $1
+            RETURNING *
             ;
         `, [taskId])
+        return deletedTask;
     }catch(error){
         throw error;
     }

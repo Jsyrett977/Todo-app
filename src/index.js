@@ -17,10 +17,14 @@ const App = () => {
     useEffect(() => {
         if(token){
         fetchMe(token).then((result) => {
+            if(Object.keys(me).length){
+            if(tasks.length === me.tasks.length){
+                return
+            }}
             setMe(result);
         })
     }
-    }, [token])
+    }, [token, tasks])
     useEffect(() => {
     if(Object.keys(me).length > 0){
         fetchUserTasks(me.id, token).then((result) => {

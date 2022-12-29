@@ -25,9 +25,9 @@ tasksRouter.get('/:creatorId', requireUser, async (req, res, next) => {
 tasksRouter.post('/', requireUser, async (req, res, next) => {
     const { task, due_date, creatorId } = req.body;
     try{
-        await createTask(task, due_date, creatorId);
+        const newTask = await createTask(task, due_date, creatorId);
         res.send({
-            message: 'Task Added'
+            newTask
         })
     } catch(error){
         throw error
@@ -48,10 +48,10 @@ tasksRouter.delete('/:taskId', requireUser, async (req, res, next) => {
     const taskId = req.params.taskId;
     try{
         const deletedTask =  await deleteTask(taskId);
-        res.send({
-            message: 'Task Deleted',
+        res.send(
             deletedTask,
-        })
+        )
+
     } catch(error){
         throw error;
     }

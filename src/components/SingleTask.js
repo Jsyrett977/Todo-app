@@ -1,12 +1,20 @@
 import { updateTask, deleteTask } from "../api.js/api";
-const SingleTask = ({task, token}) => {
+const SingleTask = ({tasks, setTasks, task, token}) => {
     const dateString = new Date(task.due_date).toLocaleDateString(
         'en-US',{weekday: "long", month: "long", day: "numeric"})
-        const handleComplete = () => {
-            updateTask(task.id, task.complete, token)
+        const handleComplete = async () => {
+            const newTask = await updateTask(task.id, task.complete, token) 
+            delete newTask.creatorId;
+            const newTasks = tasks.map(task => task.id === newTask.id ? newTask : task)
+            setTasks(newTasks)
         }
-        const handleDelete = () => {
-            deleteTask(task.id, token)
+        const handleDelete = async () => {
+            const deletedTask = await deleteTask(task.id, token)
+            console.log(tasks)
+            console.log(deletedTask)
+            const newTasks = tasks.filter(task => task.id !== deletedTask.id)
+            console.log(newTasks)
+            setTasks(newTasks)
         }
     return (
         <div id='single_task'>
