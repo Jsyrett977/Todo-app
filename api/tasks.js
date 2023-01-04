@@ -3,16 +3,6 @@ const tasksRouter = express.Router()
 const { createTask, getTasks, completeTask, getTasksByUserId, deleteTask } = require('../db/index.js')
 const { requireUser } = require('./utils')
 
-tasksRouter.get('/', async (req,res, next) => {
-    try{
-    const tasks = await getTasks();
-    res.send({
-        tasks
-    })
-} catch(error){
-    throw error
-}
-})
 tasksRouter.get('/:creatorId', requireUser, async (req, res, next) => {
     const creatorId = req.params.creatorId
     try{

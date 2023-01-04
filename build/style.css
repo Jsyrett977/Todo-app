@@ -36,6 +36,9 @@ a {
 a:hover {
     color: #aaa;
 }
+.yellow {
+    color: yellow;
+}
 #header {
     display: flex;
     justify-content: space-between;

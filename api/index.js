@@ -18,7 +18,11 @@ router.use('/', async (req, res, next) => {
         next();
     }
 })
-
+router.get('/', (req, res, next) => {
+    res.send({
+        message: 'Welcome'
+    })
+})
 router.use('/tasks', tasksRouter);
 router.use('/users', usersRouter)
 module.exports = router
