@@ -21,7 +21,8 @@ const rebuildDB = async () => {
         task text NOT NULL,
         complete boolean NOT NULL DEFAULT false,
         due_date DATE NOT NULL,
-        "creatorId" INTEGER REFERENCES users(id)
+        "creatorId" INTEGER REFERENCES users(id),
+        "completedOn" DATE DEFAULT null
     );
 `)
     console.log("Tables are Created")

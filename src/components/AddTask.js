@@ -6,7 +6,7 @@ const AddTask = ({tasks, setTasks, me, token}) => {
     const [dateMessage, setDateMessage] = useState('')
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if(new Date(dueDate).getTime() < (new Date().getTime())){
+        if((new Date(dueDate).getTime() + 85399999) <= (new Date().getTime())){
             setDateMessage('Please choose a date that has not passed.')
             setDueDate('');
             return;

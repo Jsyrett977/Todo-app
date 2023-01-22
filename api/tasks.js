@@ -25,10 +25,9 @@ tasksRouter.post('/', requireUser, async (req, res, next) => {
 })
 tasksRouter.patch('/:taskId', requireUser, async (req, res, next) => {
     const taskId = req.params.taskId
-    const {complete} = req.body;
-
+    const {complete, completedOn} = req.body;
     try{
-        const taskCompleted = await completeTask(taskId, complete)
+        const taskCompleted = await completeTask(taskId, complete, completedOn)
         res.send(taskCompleted)
     }catch(error){
         throw error
@@ -41,7 +40,6 @@ tasksRouter.delete('/:taskId', requireUser, async (req, res, next) => {
         res.send(
             deletedTask,
         )
-
     } catch(error){
         throw error;
     }

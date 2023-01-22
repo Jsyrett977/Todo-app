@@ -99,6 +99,7 @@ export async function updateTask(taskId, complete, token){
             },
             body: JSON.stringify({
                 complete,
+                completedOn: new Date(),
             })
         })
         const result = await response.json();

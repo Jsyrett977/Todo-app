@@ -68,7 +68,7 @@ const getUserById = async (id) => {
 const getTasksByUserId = async (id) => {
     try{
         const {rows: tasks} = await client.query(`
-            SELECT id, task, complete, due_date
+            SELECT id, task, complete, due_date, "completedOn"
             FROM tasks
             WHERE "creatorId" = $1
             ORDER BY due_date ASC
@@ -100,15 +100,15 @@ const getUserWithTasksById = async (id) => {
         throw error
     }
 }
-const completeTask = async (taskId, complete) => {
+const completeTask = async (taskId, complete, completedOn) => {
     try{
         const {rows: [completedTask]} = await client.query(`
             UPDATE tasks
-            SET complete = $1
-            WHERE id = $2
+            SET complete = $1, "completedOn" = $2
+            WHERE id = $3
             RETURNING *
             ;
-        `, [complete, taskId])
+        `, [complete, completedOn, taskId])
         return completedTask
     }catch(error){
         throw error

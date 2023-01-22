@@ -70,7 +70,6 @@ usersRouter.post('/login', async (req, res, next) => {
                 message: "Username or Password is incorrect"
             })
         }
-
     }catch(error){
         throw error
     }
