@@ -13,6 +13,9 @@ app.use(morgan('dev'));
 app.use(express.json())
 app.use('/api', apiRouter)
 app.use(express.static(path.join(__dirname, 'build')))
+app.get('*', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
 app.use((error, req, res, next) => {
     console.error(error.stack)
     res.status(500).send(

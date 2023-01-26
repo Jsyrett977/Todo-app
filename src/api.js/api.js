@@ -1,6 +1,5 @@
 
-// const BASE_URL = "http://localhost:3001/api";
-const BASE_URL = "https://task-tracker-gsb3.onrender.com/api"
+const {BASE_URL = "http://localhost:3001/api"} = process.env;
 export async function fetchUserTasks(id, token){
     try{
         const response = await fetch(`${BASE_URL}/tasks/${id}`, {
