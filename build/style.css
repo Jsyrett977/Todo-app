@@ -94,6 +94,12 @@ label {
     margin-bottom: 10px;
     color: white;
 }
+#green{
+    box-shadow: 0 4px 8px 2px green;
+}
+#red{
+    box-shadow: 0 4px 8px 2px red;
+}
 input{
     margin: 2px;
 }
@@ -136,6 +142,13 @@ input{
 }
 .complete_button:hover, #nav_login:hover {
     background-color: #008800;
+}
+#not-complete{
+    background-color: rgb(159, 159, 16);
+    transition: all 0.5s ease;
+}
+#not-complete:hover {
+    background-color: rgb(198, 198, 41);
 }
 #logout_button {
     padding: 8px 12px;
