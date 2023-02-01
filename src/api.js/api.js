@@ -1,5 +1,6 @@
 
-const {BASE_URL = "http://localhost:3001/api"} = process.env;
+const {REACT_APP_BASE_URL = "http://localhost:3001/api"} = process.env;
+const BASE_URL = REACT_APP_BASE_URL
 export async function fetchUserTasks(id, token){
     try{
         const response = await fetch(`${BASE_URL}/tasks/${id}`, {
